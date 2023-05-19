@@ -16,7 +16,7 @@ context('Funcionalidade Login', () =>{
         cy.get('.page-title').should('contain', 'Minha conta')
     })
 
-    it('Login negado' ,  () => {
+    it('Login negado, senha errada' ,  () => {
         
         
     
@@ -25,4 +25,15 @@ context('Funcionalidade Login', () =>{
         cy.get('.woocommerce-form > .button').click()  
         cy.get('.woocommerce-error > li').should('contain', 'Erro')
     })
+
+    it.only('Login negado, email errado' ,  () => {
+        
+        
+    
+        cy.get('#username').type('alun_ebac@teste.com')
+        cy.get('#password').type('teste@teste.com')
+        cy.get('.woocommerce-form > .button').click()  
+        cy.get('.woocommerce-error > li').should('contain', 'desconhecido')
+    })
 })
+
