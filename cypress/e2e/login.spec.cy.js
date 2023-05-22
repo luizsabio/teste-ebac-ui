@@ -1,9 +1,11 @@
 /// <reference types="cypress" />
 
+const perfil = require('../fixtures/perfil.json')
+
 context('Funcionalidade Login', () =>{
 
   beforeEach(() => {
-    cy.visit ('http://lojaebac.ebaconline.art.br/minha-conta/')
+    cy.visit ('minha-conta/')
   });
   
   
@@ -16,6 +18,15 @@ context('Funcionalidade Login', () =>{
         cy.get('.page-title').should('contain', 'Minha conta')
     })
 
+    it('Deve Fazer login com sucesso - usando arquivo de dados' ,  () => {
+        
+      cy.get('#username').type(perfil.usuario)
+      cy.get('#password').type(perfil.senha)
+      cy.get('.woocommerce-form > .button').click()
+      cy.get('.page-title').should('contain', 'Minha conta')
+  })
+
+
     it('Login negado, senha errada' ,  () => {
         
         
@@ -26,7 +37,7 @@ context('Funcionalidade Login', () =>{
         cy.get('.woocommerce-error > li').should('contain', 'Erro')
     })
 
-    it.only('Login negado, email errado' ,  () => {
+    it('Login negado, email errado' ,  () => {
         
         
     
