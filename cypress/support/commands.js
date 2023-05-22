@@ -31,3 +31,27 @@ Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('.page-title').should('contain', 'Minha conta')
 
  })
+
+ Cypress.Commands.add('preCadastro', (email, senhacadastro, nome, sobrenome) => {
+    cy.get('#reg_email').type(email)
+    cy.get('#reg_password').type(senhacadastro)
+    cy.get(':nth-child(4) > .button').click()
+    cy.get('.woocommerce-MyAccount-navigation-link--edit-account > a').click()
+    cy.get('#account_first_name').type(nome)
+    cy.get('#account_last_name').type(sobrenome)
+    cy.get('.woocommerce-Button').click()
+    cy.get('.woocommerce-message').should('contain', 'sucesso')
+
+
+  })
+
+  Cypress.Commands.add('addProdutos', (quantidade) => {
+    cy.get(' .product-block').eq(0).click()
+        cy.get('.button-variable-item-M').click()
+        cy.get('.button-variable-item-Blue').click()
+        cy.get('.input-text').click().clear().type(quantidade)
+        cy.get('.single_add_to_cart_button').click()
+        cy.get('.dropdown-toggle > .mini-cart-items').should('contain', quantidade)
+
+
+  })

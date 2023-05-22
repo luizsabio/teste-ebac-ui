@@ -1,10 +1,13 @@
 /// <reference types="cypress" />
 
+const perfil = require('../fixtures/perfil.json')
+
 describe('Funcionalidade Endereços', () => {
 
     beforeEach(() => {
-        cy.visit ('http://lojaebac.ebaconline.art.br/minha-conta/')
-        cy.login ('aluno_ebac@teste.com', 'teste@teste.com' )
+        cy.visit ('minha-conta/')
+       
+        cy.login (perfil.usuario, perfil.senha )
     });
     
     
